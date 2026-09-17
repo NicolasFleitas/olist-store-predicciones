@@ -1,5 +1,26 @@
 .atl/
-.venv
+.venv/
+
+# Python cache / bytecode
 __pycache__/
+*.py[cod]
+*.egg-info/
+
+# uv
+.uv/
+
+# Jupyter
 .ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+.jupyter/
+
+# Herramientas
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Editores / OS
+.vscode/
+.idea/
 .DS_Store
+Thumbs.db

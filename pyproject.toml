@@ -1,0 +1,16 @@
+[project]
+name = "olist-store-predicciones"
+version = "0.1.0"
+description = "Prediccion de tiempos de entrega Olist con HistGradientBoosting (regresion tabular, MAE)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "ipykernel",
+  "jupyterlab",
+  "matplotlib",
+  "nbstripout>=0.9.1",
+  "numpy",
+  "pandas",
+  "scikit-learn",
+  "seaborn",
+]

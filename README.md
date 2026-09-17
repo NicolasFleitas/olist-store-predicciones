@@ -22,45 +22,50 @@ Modelo ganador: **Gradient Boosting** (menor MAE: ~3 días y 18 hs de desvío pr
 ```
 ├── olist_predict.ipynb   # Notebook con el pipeline completo
 ├── datasets/             # CSVs de Olist
-├── requirements.txt      # Dependencias fijadas (freeze verificado)
+├── pyproject.toml        # Dependencias del proyecto (PEP 621)
+├── uv.lock               # Lockfile generado con uv
+├── .python-version       # Python 3.12
+├── requirements.txt      # Alternativa para pip (autogenerado con uv export)
 └── README.md
 ```
 
-## Instalación
+## Clonar e instalar
 
-Requiere Python 3.12+ (probado en 3.14.6).
-
-Con `uv` (recomendado — te instala ese Python sin tocar el del sistema):
+Requisitos: `uv` + Python `>=3.12` (se recomienda 3.12 vía `.python-version`).
 
 ```bash
-uv python install 3.12
-uv venv --python 3.12
-source .venv/bin/activate
-uv pip install -r requirements.txt
+git clone https://github.com/NicolasFleitas/olist-store-predicciones.git
+cd olist-store-predicciones
 ```
 
-Con `pip` (instalá Python 3.12 o superior desde [python.org](https://www.python.org/downloads/) primero):
+Con `uv` (recomendado):
 
 ```bash
-python3.12 -m venv .venv
-source .venv/bin/activate
+uv sync
+uv run jupyter lab
+```
+
+Con `pip` (alternativo):
+
+```bash
 pip install -r requirements.txt
+jupyter lab
 ```
 
-> En Windows usá `.venv\Scripts\activate` en lugar de `source .venv/bin/activate`.
+## Notebooks sin outputs (nbstripout)
 
-## Ejecución
+Este repo usa `nbstripout` para no versionar outputs ni metadata de ejecución (`*.ipynb filter=nbstripout` + `diff=ipynb` en `.gitattributes`).
 
-1. Activar el entorno virtual:
+Después de clonar, activá el filtro una vez:
 
-   ```bash
-   source .venv/bin/activate
-   ```
+```bash
+uv sync
+uv run nbstripout --install
+```
 
-2. Abrir el notebook:
+A partir de ahí `git diff` y `git commit` guardan el notebook limpio automáticamente.
 
-   ```bash
-   jupyter notebook olist_predict.ipynb
-   ```
+## Replicar
 
-Ejecutar las celdas en orden. Para agregar una dependencia nueva: `pip install <paquete>` o `uv pip install <paquete>`, y luego `uv pip freeze --python .venv/bin/python > requirements.txt`.
+1. `uv run jupyter lab`
+2. Abrir `olist_predict.ipynb` → *Run All*.
